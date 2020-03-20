@@ -17,11 +17,13 @@ function OnboardingForm({ values, errors, touched }) {
         <div><Field type='password' name='password' placeholder='Password' /></div>
         {errors.password && touched.password ? <div>{errors.password}</div> : null}
         
-        <div></div>
-        <label>
-          <Field type='checkbox' name='termsofservice' />
-          Accept our Terms of Service
-        </label>
+        <div>
+          <label>
+            <Field type='checkbox' name='termsofservice' />
+            Accept our Terms of Service
+          </label>
+        </div>
+        {errors.termsofservice ? <div>{errors.termsofservice}</div> : null}
 
         <div></div>
         <button type='submit'>Submit Form</button>
@@ -50,9 +52,9 @@ const FormikOnboardingForm = withFormik({
     password: Yup.string()
       .min(6, 'Password must be 6 characters or longer')
       .required('Password required'),
-    termsofservice: Yup.object()
+    termsofservice: Yup.boolean()
       // .boolean()
-      // .oneOf([true], 'Must accept Terms of Service')
+      .oneOf([true], 'Must accept Terms of Service')
   }),
 
   handleSubmit(values) {
