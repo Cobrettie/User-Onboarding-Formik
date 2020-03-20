@@ -3,7 +3,7 @@ import React from 'react';
 const UserList = ({ users }) => {
   return (
     <div>
-      <h2>Users</h2>
+      <h2>User List</h2>
       <div>
         {users.map(user => {
           const { firstname, lastname } = user.values;
