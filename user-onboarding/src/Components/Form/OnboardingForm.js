@@ -23,7 +23,7 @@ function OnboardingForm({ values, errors, touched }) {
             Accept our Terms of Service
           </label>
         </div>
-        {errors.termsofservice ? <div>{errors.termsofservice}</div> : null}
+        {errors.termsofservice ? <div>{errors.termsofservice}{console.log(errors)}</div> : null}
 
         <div></div>
         <button type='submit'>Submit Form</button>
