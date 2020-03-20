@@ -57,8 +57,14 @@ const FormikOnboardingForm = withFormik({
       .oneOf([true], 'Must accept Terms of Service')
   }),
 
-  handleSubmit(values) {
-    console.log(values)
+  handleSubmit(values, formikBag) {
+    console.log('values', values)
+    console.log('formikBag', formikBag)
+    axios 
+      .post('https://reqres.in/api/users', {values})
+      .then(response => 
+        console.log(response)
+      )
   }
 })(OnboardingForm);
 
