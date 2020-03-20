@@ -3,7 +3,7 @@ import { withFormik, Form, Field} from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 
-import UserCard from '../UserCard';
+import UserList from '../UserList';
 
 const OnboardingForm = ({ values, errors, touched, status }) => {
 
@@ -40,7 +40,7 @@ const OnboardingForm = ({ values, errors, touched, status }) => {
         <button type='submit'>Submit Form</button>
       </Form>
       <div>
-        <UserCard users={users} />
+        <UserList users={users} />
       </div>
     </div>
   )

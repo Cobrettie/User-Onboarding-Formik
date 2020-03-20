@@ -1,12 +1,11 @@
 import React from 'react';
 
-const UserCard = ({ users }) => {
+const UserList = ({ users }) => {
   return (
     <div>
-      <h2>User Card</h2>
+      <h2>Users</h2>
       <div>
         {users.map(user => {
-          console.log('user map', user)
           const { firstname, lastname } = user.values;
           return (
             <div key={user.id}>
@@ -20,4 +19,4 @@ const UserCard = ({ users }) => {
   )
 }
 
-export default UserCard
+export default UserList;
