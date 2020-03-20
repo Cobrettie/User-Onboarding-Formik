@@ -8,21 +8,22 @@ function OnboardingForm({ values, errors, touched }) {
     <div>
       <h2>Formik Form Component</h2>
       <Form>
-        <div>{touched.firstname && errors.firstname}</div>
-        <Field type='text' name='firstname' placeholder='First Name' />
+        <div><Field type='text' name='firstname' placeholder='First Name' /></div>
+        {errors.firstname && touched.firstname ? <div>{errors.firstname}</div> : null}
 
-        <div>{touched.lastname && errors.lastname}</div>
-        <Field type='text' name='lastname' placeholder='Last Name' />
+        <div><Field type='text' name='lastname' placeholder='Last Name' /></div>
+        {errors.lastname && touched.lastname ? <div>{errors.lastname}</div> : null}
 
-        <div>{touched.password && errors.password && <p>{errors.password}</p>}</div>
-        <Field type='password' name='password' placeholder='Password' />
+        <div><Field type='password' name='password' placeholder='Password' /></div>
+        {errors.password && touched.password ? <div>{errors.password}</div> : null}
         
-        {/* <div>{touched.termsofservice && errors.termsofservice && <p>{errors.termsofservice}</p>}</div> */}
+        <div></div>
         <label>
           <Field type='checkbox' name='termsofservice' />
           Accept our Terms of Service
         </label>
 
+        <div></div>
         <button type='submit'>Submit Form</button>
       </Form>
     </div>
@@ -41,10 +42,10 @@ const FormikOnboardingForm = withFormik({
 
   validationSchema: Yup.object().shape({
     firstname: Yup.string()
-      // .firstname('Please enter your first name')
+      .min(2, 'First name too short')
       .required('First name required'),
     lastname: Yup.string()
-      // .lastname('Please enter your last name')
+      .min(2, 'Last name too short')
       .required('Last name required'),
     password: Yup.string()
       .min(6, 'Password must be 6 characters or longer')
