@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field} from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 
-const [users, setUsers] = useState([]);
+import UserCard from '../UserCard';
 
-function OnboardingForm({ values, errors, touched }) {
+const OnboardingForm = ({ values, errors, touched, status }) => {
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    status && setUsers(users => [...users, status])
+  }, [status])
+
+  console.log('status', status);
+
   return (
     <div>
       <h2>Formik Form Component</h2>
@@ -30,11 +39,16 @@ function OnboardingForm({ values, errors, touched }) {
         <div></div>
         <button type='submit'>Submit Form</button>
       </Form>
+      <div>
+        <UserCard users={users} />
+      </div>
     </div>
   )
 }
 
 const FormikOnboardingForm = withFormik({
+
+  
   mapPropsToValues({ firstname, lastname, password, termsofservice }) {
     return {
       firstname: firstname || '',
@@ -52,7 +66,7 @@ const FormikOnboardingForm = withFormik({
       .min(2, 'Last name too short')
       .required('Last name required'),
     password: Yup.string()
-      .min(6, 'Password must be 6 characters or longer')
+      .min(2, 'Password must be 2 characters or longer')
       .required('Password required'),
     termsofservice: Yup.boolean()
       // .boolean()
@@ -64,11 +78,12 @@ const FormikOnboardingForm = withFormik({
     console.log('formikBag', formikBag)
     axios 
       .post('https://reqres.in/api/users', {values})
-      .then(response => 
+      .then(response => {
         console.log(response)
-      )
+        formikBag.setStatus(response.data)
+        formikBag.resetForm()
+      })
       .catch(err => console.log(err))
-    formikBag.resetForm();
   }
 })(OnboardingForm);
 

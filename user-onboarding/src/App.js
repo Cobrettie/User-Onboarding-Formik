@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 import FormikOnboardingForm from './Components/Form/OnboardingForm';
 
-function App() {
+const App = () => {
+
+const [users, setUsers] = useState([]);
+
   return (
     <div className="App">
-      <FormikOnboardingForm />
+      <FormikOnboardingForm users={users} />
     </div>
   );
 }
